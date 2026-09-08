@@ -1,0 +1,494 @@
+
+🌱 AGROSYNC
+
+Levantamiento de Requerimientos
+
+Proyecto: AgroSync
+Tipo: Plataforma comercial agroindustrial
+Versión: 1.0
+Estado: En definición
+
+
+📌 1. DESCRIPCIÓN GENERAL
+
+AgroSync es una plataforma comercial agroindustrial que busca funcionar como un centro comercial digital para empresas del sector agro.
+
+Cada empresa contará con un espacio propio dentro de AgroSync, similar a un local dentro de un centro comercial. Desde este espacio podrá mostrar su empresa, presentar sus productos y establecer relaciones comerciales con otras empresas.
+
+La plataforma también contará con un espacio de comercio donde las empresas podrán descubrir productos, conocer a las empresas que los ofrecen, visitar sus locales y establecer contacto.
+
+AgroSync también ofrecerá herramientas de gestión para que las empresas puedan llevar un control de sus productos, inventario, compras, ventas y pedidos.
+
+Estas herramientas serán complementarias y no serán el centro principal de la experiencia. AgroSync debe sentirse como un espacio comercial y no como un sistema administrativo.
+
+
+🎯 2. OBJETIVO DE LA PLATAFORMA
+
+Crear un espacio digital donde las empresas agroindustriales puedan mostrar su trabajo, ofrecer sus productos, descubrir otras empresas, realizar compras y establecer relaciones comerciales.
+
+AgroSync busca conectar empresas del sector agro y facilitar el comercio entre ellas, ofreciendo al mismo tiempo un espacio propio para cada empresa.
+
+
+👥 3. ACTORES DEL SISTEMA
+
+3.1 👤 VISITANTE
+
+Persona que ingresa a AgroSync sin iniciar sesión.
+
+Puede:
+- Conocer AgroSync.
+- Explorar empresas.
+- Explorar productos.
+- Visitar los locales públicos de las empresas.
+- Consultar información disponible públicamente.
+- Conocer novedades y oportunidades.
+- Registrarse o iniciar sesión.
+
+
+3.2 🏢 USUARIO DE EMPRESA
+
+Persona que utiliza AgroSync en representación de una empresa.
+
+Puede:
+- Ingresar al local de su empresa.
+- Administrar productos según sus permisos.
+- Consultar información de su empresa.
+- Explorar el Marketplace.
+- Comprar productos.
+- Comunicarse con otras empresas.
+- Utilizar las herramientas de gestión disponibles.
+
+
+3.3 👨‍💼 ADMINISTRADOR DE EMPRESA
+
+Usuario encargado de administrar el espacio de una empresa.
+
+Puede:
+- Administrar la información de la empresa.
+- Administrar el local.
+- Agregar, modificar y retirar productos.
+- Consultar ventas.
+- Consultar compras.
+- Administrar inventario.
+- Gestionar pedidos.
+- Administrar usuarios de su empresa.
+- Acceder a las herramientas de gestión.
+
+
+3.4 🌱 AGROSYNC
+
+AgroSync representa a la empresa responsable de administrar y supervisar la plataforma.
+
+Puede:
+- Administrar la plataforma.
+- Administrar empresas.
+- Realizar procesos de verificación.
+- Administrar planes.
+- Administrar insignias.
+- Atender solicitudes.
+- Brindar soporte.
+- Supervisar el Marketplace.
+- Administrar contenido general.
+
+
+⚙️ 4. REQUERIMIENTOS FUNCIONALES
+
+RF-01 📝 REGISTRO DE EMPRESAS
+
+El sistema debe permitir que una empresa cree una cuenta en AgroSync y obtenga un espacio propio dentro de la plataforma.
+
+
+RF-02 🔑 INICIO DE SESIÓN
+
+El sistema debe permitir que los usuarios registrados ingresen a AgroSync utilizando sus datos de acceso.
+
+
+RF-03 🏪 LOCAL DIGITAL 
+
+El sistema debe permitir que cada empresa tenga un local digital dentro de AgroSync.
+
+El local podrá mostrar:
+- Nombre de la empresa.
+- Logo.
+- Descripción.
+- Información comercial.
+- Productos.
+- Información que la empresa decida mostrar públicamente.
+
+
+RF-04 📦 ADMINISTRACIÓN DE PRODUCTOS
+
+El sistema debe permitir que las empresas agreguen, modifiquen y retiren productos de su local.
+
+Cada producto podrá contener:
+- Nombre.
+- Descripción.
+- Imagen.
+- Precio.
+- Unidad de venta.
+- Disponibilidad.
+- Información adicional del producto.
+
+
+RF-05 🛒 MARKETPLACE
+
+El sistema debe permitir que los usuarios exploren productos ofrecidos por diferentes empresas agroindustriales.
+
+Los productos podrán organizarse por categorías para facilitar su búsqueda.
+
+
+RF-06 🏢 INFORMACIÓN DE LA EMPRESA
+
+Cuando un usuario consulte un producto, el sistema debe permitir conocer qué empresa ofrece dicho producto.
+
+
+RF-07 🏪 VER TIENDA
+
+Desde la información de un producto, el sistema debe permitir al usuario acceder al local de la empresa que ofrece el producto.
+
+Dentro del local, el usuario podrá conocer otros productos ofrecidos por la misma empresa.
+
+
+RF-08 🛍️ COMPRAS
+
+El sistema debe permitir que las empresas realicen compras de productos disponibles dentro de AgroSync.
+
+
+RF-09 💰 VENTAS
+
+El sistema debe permitir que las empresas verificadas puedan ofrecer y vender sus productos mediante el Marketplace.
+
+
+RF-10 💬 COMUNICACIÓN ENTRE EMPRESAS
+
+El sistema debe permitir que las empresas puedan comunicarse entre ellas para consultar productos, realizar negociaciones y establecer relaciones comerciales.
+
+
+RF-11 🏢 DIRECTORIO DE EMPRESAS
+
+El sistema debe contar con un espacio donde los usuarios puedan descubrir y consultar empresas que forman parte de AgroSync.
+
+
+RF-12 🏠 INICIO
+
+El sistema debe contar con una página de inicio independiente del local de cada empresa.
+
+El inicio podrá mostrar:
+- Empresas destacadas.
+- Productos.
+- Novedades.
+- Publicaciones.
+- Anuncios.
+- Oportunidades comerciales.
+
+
+RF-13 📊 GESTIÓN EMPRESARIAL
+
+AgroSync debe proporcionar herramientas básicas para que las empresas puedan llevar control de sus actividades.
+
+Inicialmente se contemplan:
+- Productos.
+- Inventario.
+- Compras.
+- Ventas.
+- Pedidos.
+
+
+RF-14 ⚙️ ACCESO A GESTIÓN DESDE MI LOCAL
+
+El local de cada empresa debe contar con accesos que permitan dirigirse a las herramientas de gestión.
+
+La gestión no debe ocupar el espacio principal del local.
+
+
+RF-15 🔐 VERIFICACIÓN DE EMPRESAS
+
+El sistema debe permitir que AgroSync realice un proceso de verificación de las empresas que quieran vender productos mediante el Marketplace.
+
+
+RF-16 🟢 ESTADO DE LA EMPRESA
+
+El sistema debe permitir identificar el estado de una empresa dentro de AgroSync.
+
+Estados iniciales:
+- En proceso.
+- Verificada.
+- No verificada.
+- Suspendida.
+
+
+RF-17 💳 PLANES DE AGROSYNC
+
+El sistema debe permitir administrar diferentes planes comerciales ofrecidos por AgroSync.
+
+
+RF-18 ✅ INSIGNIA DE VERIFICACIÓN
+
+El sistema debe permitir mostrar una insignia a las empresas que hayan cumplido correctamente con el proceso de verificación y que tengan activo el beneficio correspondiente.
+
+
+RF-19 ⭐ BENEFICIOS DE LOS PLANES
+
+El sistema debe permitir aplicar los beneficios correspondientes a los planes adquiridos por las empresas.
+
+Los beneficios deberán reflejarse dentro de la plataforma.
+
+
+📋 5. REQUERIMIENTOS NO FUNCIONALES
+
+RNF-01 🙂 FACILIDAD DE USO
+
+La plataforma debe ser sencilla de entender y utilizar, incluso para personas que no tengan conocimientos técnicos.
+
+
+RNF-02 📱 ADAPTACIÓN A DIFERENTES DISPOSITIVOS
+
+AgroSync debe poder utilizarse correctamente desde computadores, tablets y teléfonos.
+
+
+RNF-03 🔐 SEGURIDAD
+
+La información de las empresas y usuarios debe estar protegida y debe ser accesible únicamente según los permisos establecidos.
+
+
+RNF-04 ⚡ RENDIMIENTO
+
+Las páginas y funciones de AgroSync deben responder de manera rápida y adecuada.
+
+
+RNF-05 🌐 DISPONIBILIDAD
+
+La plataforma debe estar disponible para que las empresas puedan acceder a sus locales y herramientas cuando las necesiten.
+
+
+RNF-06 📈 CRECIMIENTO
+
+La plataforma debe poder incorporar nuevas funciones en el futuro sin tener que reconstruirse completamente.
+
+
+📜 6. REGLAS DEL NEGOCIO
+
+RN-01 👤 REGISTRO
+
+Cualquier persona puede crear una cuenta para conocer y utilizar las funciones disponibles de AgroSync.
+
+
+RN-02 🏢 EMPRESAS NO VERIFICADAS
+
+Una empresa no necesita estar verificada para crear su cuenta, conocer AgroSync y utilizar las funciones disponibles para ella.
+
+
+RN-03 🛒 COMPRAS
+
+Las empresas no verificadas pueden realizar compras dentro de AgroSync, siempre que cumplan las condiciones necesarias para realizar dicha operación.
+
+
+RN-04 💰 VENTAS
+
+Una empresa debe estar verificada para poder vender productos mediante el Marketplace.
+
+
+RN-05 🔐 VERIFICACIÓN Y PLANES
+
+La verificación de una empresa y los planes comerciales de AgroSync son procesos diferentes.
+
+
+RN-06 ⭐ BENEFICIOS DE PLANES
+
+Una empresa debe cumplir las condiciones correspondientes para recibir los beneficios de los planes adquiridos.
+
+
+RN-07 🟢 BENEFICIOS ACTIVOS
+
+Los beneficios adquiridos mediante un plan deben reflejarse en la plataforma una vez que el plan esté activo.
+
+
+RN-08 🏪 LOCAL DE EMPRESA
+
+Cada empresa tendrá un local digital propio dentro del centro comercial AgroSync.
+
+
+RN-09 📦 PRODUCTOS
+
+Los productos publicados dentro de AgroSync deben estar relacionados con una empresa registrada.
+
+
+RN-10 🔗 RELACIÓN PRODUCTO - EMPRESA
+
+Desde un producto, el usuario debe poder acceder al local de la empresa que lo ofrece.
+
+
+✨ 7. PRINCIPIOS DE LA EXPERIENCIA
+
+PR-01 🏬 CENTRO COMERCIAL DIGITAL
+
+AgroSync debe sentirse como un centro comercial agroindustrial digital y no como un sistema administrativo.
+
+
+PR-02 ❤️ EL LOCAL ES EL CENTRO DE LA EMPRESA
+
+Cada empresa debe sentir que tiene su propio espacio dentro de AgroSync, donde puede mostrar su identidad, productos y trabajo.
+
+
+PR-03 🌱 EXPERIENCIA ANTES QUE ADMINISTRACIÓN
+
+La experiencia principal debe estar enfocada en descubrir, conocer, visitar, conectar, comprar y vender.
+
+La administración debe estar disponible, pero no debe dominar la experiencia.
+
+
+PR-04 🤝 CONEXIÓN ENTRE EMPRESAS
+
+AgroSync debe facilitar que una empresa pueda descubrir a otra, conocer sus productos, visitar su local y establecer contacto.
+
+
+PR-05 📈 CRECIMIENTO JUNTO A LAS EMPRESAS
+
+AgroSync debe permitir que empresas pequeñas puedan utilizar la plataforma y crecer dentro de ella sin quedar completamente limitadas por no estar verificadas.
+
+
+🔄 8. FLUJO PRINCIPAL DE COMERCIO
+
+El flujo principal esperado es:
+
+DESCUBRIR
+    ↓
+PRODUCTO
+    ↓
+EMPRESA
+    ↓
+LOCAL
+    ↓
+OTROS PRODUCTOS
+    ↓
+CONTACTAR
+    ↓
+COMPRAR / NEGOCIAR
+
+
+🧭 9. ESTRUCTURA GENERAL DE LA PLATAFORMA
+
+🏠 INICIO
+
+Espacio principal para descubrir contenido de AgroSync.
+
+Incluye:
+- Empresas.
+- Productos.
+- Novedades.
+- Anuncios.
+- Oportunidades.
+
+
+🏪 MI LOCAL
+
+Espacio propio de cada empresa.
+
+Incluye:
+- Identidad de la empresa.
+- Logo.
+- Información.
+- Productos.
+- Presentación del negocio.
+- Acceso a herramientas de gestión.
+- Comunicación.
+
+
+🛒 MARKETPLACE
+
+Espacio donde las empresas pueden descubrir productos ofrecidos por otras empresas.
+
+Incluye:
+- Productos.
+- Categorías.
+- Búsqueda.
+- Información del producto.
+- Empresa que lo ofrece.
+- Acceso al local.
+
+
+🏢 EMPRESAS
+
+Espacio para descubrir empresas que forman parte de AgroSync.
+
+Incluye:
+- Empresas.
+- Información básica.
+- Estado de verificación.
+- Local de la empresa.
+- Productos.
+
+
+⚙️ GESTIÓN
+
+Espacio secundario para administrar las actividades de la empresa.
+
+Incluye inicialmente:
+- Productos.
+- Inventario.
+- Compras.
+- Ventas.
+- Pedidos.
+
+
+🚀 10. ALCANCE DE LA PRIMERA VERSIÓN
+
+La primera versión de AgroSync estará enfocada en construir la experiencia principal de la plataforma y sus funciones comerciales básicas.
+
+INCLUIDO:
+
+- Registro.
+- Inicio de sesión.
+- Local de empresa.
+- Productos.
+- Marketplace.
+- Empresas.
+- Compras.
+- Ventas.
+- Inventario básico.
+- Pedidos.
+- Comunicación entre empresas.
+- Gestión básica.
+- Verificación.
+- Planes.
+- Insignias.
+
+
+🔮 NO INCLUIDO EN LA PRIMERA VERSIÓN:
+
+- Drones.
+- Sistemas IoT.
+- Investigación avanzada de suelos.
+- Inteligencia artificial avanzada.
+- Eventos físicos.
+- ExpoAgroSync.
+- Sistemas científicos especializados.
+- Automatizaciones empresariales avanzadas.
+
+Estas funciones podrán formar parte de futuras etapas de crecimiento de AgroSync.
+
+
+🌎 11. VISIÓN A FUTURO
+
+AgroSync busca evolucionar progresivamente desde una plataforma digital de comercio agroindustrial hacia un ecosistema tecnológico para el sector agro.
+
+A futuro se contempla la posibilidad de incorporar:
+
+- Eventos y encuentros empresariales.
+- Ferias agroindustriales.
+- Empresas aliadas y empresas Partner.
+- Soluciones IoT.
+- Drones.
+- Inteligencia artificial.
+- Investigación agrícola.
+- Herramientas de análisis.
+- Nuevas soluciones tecnológicas para el sector agro.
+
+
+📝 12. ESTADO DEL DOCUMENTO
+
+Este documento representa la primera versión del levantamiento de requerimientos de AgroSync.
+
+Los requerimientos podrán modificarse, eliminarse o ampliarse durante las etapas de análisis, diseño, desarrollo y validación del proyecto.
+
+Toda modificación importante deberá ser revisada antes de incorporarse como parte oficial del proyecto.
