@@ -2,7 +2,7 @@ import { ArrowRight, ShieldCheck, Store } from 'lucide-react';
 import { products, companies } from '../../data/mockData';
 import { useNavigate } from 'react-router-dom';
 
-function ProductCard({ product, compact = false }) {
+function ProductCard({ product, compact = false, onSelect }) {
   const navigate = useNavigate();
 
   const availabilityColor = {
@@ -15,7 +15,10 @@ function ProductCard({ product, compact = false }) {
     new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(price);
 
   return (
-    <div className="bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-xl hover:border-green-200 transition-all duration-300 overflow-hidden card-hover group">
+    <div
+      className={`bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-xl hover:border-green-200 transition-all duration-300 overflow-hidden card-hover group h-full ${onSelect ? 'cursor-pointer' : ''}`}
+      onClick={() => onSelect?.(product)}
+    >
       {/* Image area */}
       <div
         className="h-36 flex items-center justify-center text-5xl relative"
@@ -54,7 +57,7 @@ function ProductCard({ product, compact = false }) {
         {/* Company */}
         <div
           className="flex items-center justify-between border-t border-stone-50 pt-3 cursor-pointer group/company"
-          onClick={() => navigate(`/empresa/${companies.find(c => c.id === product.companyId)?.slug || ''}`)}
+          onClick={(e) => { e.stopPropagation(); navigate(`/empresa/${companies.find(c => c.id === product.companyId)?.slug || ''}`); }}
         >
           <div className="flex items-center gap-1.5 min-w-0">
             {product.companyVerified && <ShieldCheck className="w-3.5 h-3.5 text-green-500 flex-shrink-0" />}

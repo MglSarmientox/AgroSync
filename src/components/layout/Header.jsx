@@ -2,16 +2,20 @@ import { useState, useEffect } from 'react';
 import {
   Leaf, Menu, X, Bell, ShoppingBag, Search,
   ChevronDown, LogIn, Building2, Store, Home,
-  ShoppingCart, MessageCircle, Heart,
+  ShoppingCart, MessageCircle, Heart, Crown,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useFollow } from '../../context/FollowContext';
 import { useMessages } from '../../context/MessageContext';
+import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
+import PlansModal from '../ui/PlansModal';
+import CartDrawer from '../ui/CartDrawer';
 
 const navLinks = [
   { to: '/', label: 'Inicio', icon: Home },
   { to: '/marketplace', label: 'Marketplace', icon: ShoppingCart },
-  { to: '/directorio', label: 'Directorio', icon: Building2 },
+  { to: '/directorio', label: 'Empresas', icon: Building2 },
   { to: '/siguiendo', label: 'Siguiendo', icon: Heart },
   { to: '/mi-local', label: 'Mi Local', icon: Store },
 ];
@@ -21,9 +25,20 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
+  const [plansOpen, setPlansOpen] = useState(false);
   const { notifications, unreadCount: notifUnread, markAllRead } = useFollow();
   const { toggleChat, unreadMessagesCount } = useMessages();
+  const { user, openAuth, logout } = useAuth();
+  const { itemCount, openCart } = useCart();
   const location = useLocation();
+
+  const handleCartClick = () => {
+    if (!user) {
+      openAuth('login');
+      return;
+    }
+    openCart();
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -146,17 +161,68 @@ export default function Header() {
                 )}
               </button>
 
+              {/* Carrito */}
+              <button
+                onClick={handleCartClick}
+                className="relative p-2 rounded-lg text-green-300/70 hover:text-green-300 hover:bg-green-900/50 transition-all"
+                title="Carrito"
+              >
+                <ShoppingCart className="w-5 h-5" />
+                {itemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full flex items-center justify-center text-[9px] font-bold text-green-950 shadow-sm border border-green-950">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
+
               <div className="w-px h-6 bg-green-800" />
 
               {/* Auth CTA */}
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-green-600 hover:bg-green-500 text-white text-sm font-semibold transition-all duration-200 shadow-lg shadow-green-900/40 hover:shadow-green-600/30 hover:scale-105 active:scale-95">
-                <LogIn className="w-4 h-4" />
-                Iniciar Sesión
-              </button>
+              {user ? (
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setPlansOpen(true)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl border border-green-700 text-green-300 text-xs font-semibold hover:bg-green-900/60 hover:text-green-200 transition-all"
+                    title="Planes AgroSync"
+                  >
+                    <Crown className="w-4 h-4 text-amber-400" />
+                    Planes
+                  </button>
+                  <div className="flex items-center gap-2 pl-1 pr-3 py-1.5 rounded-xl bg-green-900/60 border border-green-800/60">
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white text-xs font-bold">
+                      {user.empresa[0]?.toUpperCase()}
+                    </div>
+                    <span className="text-green-100 text-xs font-semibold max-w-[120px] truncate">{user.empresa}</span>
+                  </div>
+                  <button
+                    onClick={logout}
+                    className="px-3 py-2 rounded-xl border border-green-800 text-green-300/80 text-xs font-semibold hover:bg-green-900/60 hover:text-green-200 transition-all"
+                    title="Cerrar sesión"
+                  >
+                    Salir
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => openAuth('login')}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-green-600 hover:bg-green-500 text-white text-sm font-semibold transition-all duration-200 shadow-lg shadow-green-900/40 hover:shadow-green-600/30 hover:scale-105 active:scale-95"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Iniciar Sesión
+                </button>
+              )}
             </div>
 
             {/* MOBILE ACTIONS */}
             <div className="flex lg:hidden items-center gap-2">
+              <button onClick={handleCartClick} className="relative p-2 rounded-lg text-green-300/70 hover:text-green-300 transition-all" title="Carrito">
+                <ShoppingCart className="w-5 h-5" />
+                {itemCount > 0 && (
+                  <span className="absolute top-1.5 right-1.5 w-3 h-3 bg-green-400 rounded-full border border-green-950 flex items-center justify-center text-[8px] font-bold text-green-950">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
               <button className="relative p-2 rounded-lg text-green-300/70 hover:text-green-300 transition-all">
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-400 rounded-full" />
@@ -250,15 +316,50 @@ export default function Header() {
 
         {/* Bottom CTA */}
         <div className="px-4 py-5 border-t border-green-800/40 space-y-3">
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 hover:bg-green-500 text-white font-semibold text-sm transition-all shadow-lg">
-            <LogIn className="w-4 h-4" />
-            Iniciar Sesión
-          </button>
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-green-700 text-green-300 hover:bg-green-900/50 font-medium text-sm transition-all">
-            Crear cuenta empresarial
-          </button>
+          {user ? (
+            <>
+              <div className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-green-900/60 border border-green-800/60">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white text-sm font-bold">
+                  {user.empresa[0]?.toUpperCase()}
+                </div>
+                <span className="text-green-100 text-sm font-semibold truncate flex-1">{user.empresa}</span>
+                <button
+                  onClick={logout}
+                  className="text-green-400 hover:text-green-200 text-xs font-semibold transition-colors"
+                >
+                  Salir
+                </button>
+              </div>
+              <button
+                onClick={() => { setPlansOpen(true); setDrawerOpen(false); }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-amber-950 font-bold text-sm transition-all shadow-lg active:scale-95"
+              >
+                <Crown className="w-4 h-4" />
+                Ver planes AgroSync
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => openAuth('login')}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 hover:bg-green-500 text-white font-semibold text-sm transition-all shadow-lg"
+              >
+                <LogIn className="w-4 h-4" />
+                Iniciar Sesión
+              </button>
+              <button
+                onClick={() => openAuth('register')}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-green-700 text-green-300 hover:bg-green-900/50 font-medium text-sm transition-all"
+              >
+                Crear cuenta empresarial
+              </button>
+            </>
+          )}
         </div>
       </div>
+
+      <PlansModal open={plansOpen} onClose={() => setPlansOpen(false)} />
+      <CartDrawer />
     </>
   );
 }

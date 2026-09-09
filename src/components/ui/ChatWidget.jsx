@@ -15,9 +15,12 @@ export default function ChatWidget() {
 
   useEffect(() => {
     if (activeChatId) markAsRead(activeChatId);
-    // Scroll to bottom
+  }, [activeChatId, markAsRead]);
+
+  useEffect(() => {
+    // Scroll to bottom when messages or active chat change
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [activeChatId, conversations, markAsRead]);
+  }, [conversations, activeChatId]);
 
   if (!chatOpen) return null;
 

@@ -1,6 +1,8 @@
-import { ArrowRight, Clock, MapPin, TrendingUp, Users } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Clock, MapPin, TrendingUp } from 'lucide-react';
 import { opportunities } from '../../data/mockData';
 import VerificationBadge from '../ui/VerificationBadge';
+import OpportunityDetailModal from '../ui/OpportunityDetailModal';
 
 const typeConfig = {
   blue: { bg: 'bg-blue-100', text: 'text-blue-700', border: 'border-blue-200', dot: 'bg-blue-500' },
@@ -8,11 +10,14 @@ const typeConfig = {
   amber: { bg: 'bg-amber-100', text: 'text-amber-700', border: 'border-amber-200', dot: 'bg-amber-500' },
 };
 
-function OpportunityCard({ opp }) {
+function OpportunityCard({ opp, onSelect }) {
   const config = typeConfig[opp.typeColor] || typeConfig.blue;
 
   return (
-    <div className="bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300 p-5 card-hover group">
+    <div
+      onClick={() => onSelect(opp)}
+      className="bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300 p-5 card-hover group cursor-pointer"
+    >
       {/* Header */}
       <div className="flex items-start justify-between gap-3 mb-3">
         <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${config.bg} ${config.text} ${config.border}`}>
@@ -53,7 +58,10 @@ function OpportunityCard({ opp }) {
       </div>
 
       {/* CTA */}
-      <button className="w-full flex items-center justify-center gap-2 py-2 rounded-xl border border-green-200 text-green-700 text-xs font-semibold hover:bg-green-50 hover:border-green-300 transition-all">
+      <button
+        onClick={(e) => { e.stopPropagation(); onSelect(opp); }}
+        className="w-full flex items-center justify-center gap-2 py-2 rounded-xl border border-green-200 text-green-700 text-xs font-semibold hover:bg-green-50 hover:border-green-300 transition-all"
+      >
         Ver oportunidad
         <ArrowRight className="w-3.5 h-3.5" />
       </button>
@@ -62,6 +70,8 @@ function OpportunityCard({ opp }) {
 }
 
 export default function OpportunitiesSection() {
+  const [selected, setSelected] = useState(null);
+
   return (
     <section className="py-20 bg-stone-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -88,10 +98,12 @@ export default function OpportunitiesSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
           {opportunities.map((opp) => (
-            <OpportunityCard key={opp.id} opp={opp} />
+            <OpportunityCard key={opp.id} opp={opp} onSelect={setSelected} />
           ))}
         </div>
       </div>
+
+      <OpportunityDetailModal opp={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

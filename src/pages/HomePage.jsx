@@ -2,6 +2,7 @@ import HeroSection from '../components/home/HeroSection';
 import OpportunitiesSection from '../components/home/OpportunitiesSection';
 import FeaturedCompanies from '../components/home/FeaturedCompanies';
 import FeaturedProducts from '../components/home/FeaturedProducts';
+import Footer from '../components/layout/Footer';
 import { ArrowRight, Leaf } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,6 +47,7 @@ export default function HomePage() {
       <FeaturedCompanies />
       <FeaturedProducts />
       <CtaBanner />
+      <Footer />
     </main>
   );
 }

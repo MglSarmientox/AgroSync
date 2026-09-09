@@ -1,5 +1,4 @@
-import { createContext, useContext, useState } from 'react';
-import { companies } from '../data/mockData';
+import { createContext, useContext, useState, useCallback } from 'react';
 
 const MessageContext = createContext();
 
@@ -26,20 +25,21 @@ export function MessageProvider({ children }) {
     }
   ]);
 
-  const toggleChat = () => setChatOpen(!chatOpen);
-  const closeChat = () => setChatOpen(false);
-  const openChat = () => setChatOpen(true);
+  const toggleChat = useCallback(() => setChatOpen(prev => !prev), []);
+  const closeChat = useCallback(() => setChatOpen(false), []);
+  const openChat = useCallback(() => setChatOpen(true), []);
 
-  const startConversation = (companyId) => {
+  const startConversation = useCallback((companyId) => {
     // Check if conversation exists
-    if (!conversations.find(c => c.companyId === companyId)) {
-      setConversations([{ companyId, messages: [], unread: 0 }, ...conversations]);
-    }
+    setConversations(prev => {
+      if (prev.find(c => c.companyId === companyId)) return prev;
+      return [{ companyId, messages: [], unread: 0 }, ...prev];
+    });
     setActiveChatId(companyId);
     setChatOpen(true);
-  };
+  }, []);
 
-  const sendMessage = (companyId, text) => {
+  const sendMessage = useCallback((companyId, text) => {
     if (!text.trim()) return;
     setConversations(prev => prev.map(conv => {
       if (conv.companyId === companyId) {
@@ -50,13 +50,17 @@ export function MessageProvider({ children }) {
       }
       return conv;
     }));
-  };
+  }, []);
 
-  const markAsRead = (companyId) => {
-    setConversations(prev => prev.map(conv => 
-      conv.companyId === companyId ? { ...conv, unread: 0 } : conv
-    ));
-  };
+  const markAsRead = useCallback((companyId) => {
+    setConversations(prev => {
+      const conv = prev.find(c => c.companyId === companyId);
+      if (!conv || conv.unread === 0) return prev;
+      return prev.map(c =>
+        c.companyId === companyId ? { ...c, unread: 0 } : c
+      );
+    });
+  }, []);
 
   const unreadMessagesCount = conversations.reduce((acc, conv) => acc + conv.unread, 0);
 

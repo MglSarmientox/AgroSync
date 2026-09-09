@@ -4,8 +4,16 @@ const FollowContext = createContext();
 
 export function FollowProvider({ children }) {
   const [followedSlugs, setFollowedSlugs] = useState(() => {
-    const saved = localStorage.getItem('agrosync_followed');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('agrosync_followed');
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed)
+        ? parsed.filter((s) => typeof s === 'string').slice(0, 500)
+        : [];
+    } catch {
+      return [];
+    }
   });
 
   useEffect(() => {
